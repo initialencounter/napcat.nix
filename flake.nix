@@ -5,12 +5,9 @@
     pkgs = import nixpkgs { inherit system; };
   in rec {
     devShells.default = pkgs.mkShell {};
-    lib.buildChronocat = module: pkgs.callPackage ./src {
+    lib.buildNapcat = module: pkgs.callPackage ./src {
       extraModules = [ module ];
     };
-    packages.default = lib.buildChronocat {};
-    packages.novnc = lib.buildChronocat {
-      sandbox.novnc = 8080;
-    };
+    packages.default = lib.buildNapcat {};
   });
 }

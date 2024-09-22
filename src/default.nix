@@ -4,4 +4,4 @@
 in (lib.evalModules {
   specialArgs = { inherit pkgs; };
   modules = modules ++ extraModules;
-}).config.chronocat
+}).config.napcat

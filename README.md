@@ -1,11 +1,30 @@
-# chronocat.nix
+# napcat.nix
 
-如果你不想用默认参数：
+Fork from [chronocat.nix](https://github.com/Anillc/chronocat.nix)
 
-```nix
-lib.x86_64-linux.buildChronocat {
-  sandbox.dns = "223.5.5.5"; # sandbox 中的 dns
-  sandbox.display = 114; # 使用的 display
-  sandbox.port = 5900; # vnc 的端口，注意并没有设置密码，请自行解决防火墙的问题
-}
+配置文件目录 ./data/napcat/config
+
+# 使用方法
+
+## install nix
+
+[NixOS](https://nixos.org/download/)
+
+```shell
+sh <(curl -L https://nixos.org/nix/install) --daemon
+```
+
+## setup
+
+```shell
+mkdir -p ~/.config/nix && touch ~/.config/nix/nix.conf
+vi ~/.config/nix/nix.conf
+# 写入
+experimental-features = nix-command
+```
+
+```shell
+nix flake update  --extra-experimental-features flakes
+nix build --extra-experimental-features flakes
+nix run --extra-experimental-features flakes
 ```
