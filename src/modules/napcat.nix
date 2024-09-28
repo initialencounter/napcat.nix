@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: let
   napcat-shell-zip = pkgs.fetchurl {
-    url = "https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.11/NapCat.Shell.zip";
+    url = "https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.16/NapCat.Shell.zip";
     hash = "sha256-DWT0AmfnEHpC64+zAynYgSR0IoVKdymVpBbspJ2ayB0=";
   };
 
