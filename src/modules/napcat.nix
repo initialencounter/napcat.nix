@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }: let
+  sources = import ./sources.nix;
   napcat-shell-zip = pkgs.fetchurl {
-    url = "https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.16/NapCat.Shell.zip";
-    hash = "sha256-DWT0AmfnEHpC64+zAynYgSR0IoVKdymVpBbspJ2ayB0=";
+    url = sources.amd64_url;
+    hash = sources.amd64_hash;
   };
 
   patched = pkgs.qq.overrideAttrs (old: {
