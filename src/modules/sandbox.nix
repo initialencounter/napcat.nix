@@ -67,7 +67,7 @@ in {
         ln -s $(which sh) /bin/sh
 
         export DISPLAY=':${toString cfg.display}'
-        createService xvfb 'Xvfb :${toString cfg.display}'
+        createService xvfb 'Xvfb :${toString cfg.display} > /dev/null 2>&1'
         if [ ! -f /root/napcat/napcat.mjs ]; then
           cp ${cfg.store}/opt/QQ/resources/app/napcat /root/napcat -r
         fi
