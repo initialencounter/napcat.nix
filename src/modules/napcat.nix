@@ -6,7 +6,11 @@
 
   patched = pkgs.qq.overrideAttrs (old: {
     buildInputs = (old.buildInputs or []) ++ [ pkgs.unzip ];  # 添加 unzip 到依赖中
-
+    version = "3.2.12-2024.9.27";
+    src = pkgs.fetchurl {
+      url = "https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.12_240927_amd64_01.deb";
+      hash = "sha256-xBGSSxXDu+qUwj203i3iAkfI97iLtGOuGMGfEU6kCyQ=";
+    };
     postFixup = ''
       mkdir -p $out/opt/QQ/resources/app/napcat
       unzip ${napcat-shell-zip} -d $out/opt/QQ/resources/app/napcat
