@@ -7,7 +7,7 @@ curl -L -o linux-qq.deb https://dldir1.qq.com/qqfile/qq/QQNT/f60e8252/linuxqq_3.
 dpkg-deb -R linux-qq.deb $qq_path
 
 echo -e "\e[32m解压deb中...\e[0m"
-curl -L -o $qq_path/opt/QQ/NapCat.Shell.zip /https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.18/NapCat.Shell.zip
+curl -L -o $qq_path/opt/QQ/NapCat.Shell.zip https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.18/NapCat.Shell.zip
 
 ## patch postinst
 cat >> $cwd/qq/DEBIAN/postinst <<EOF
@@ -18,7 +18,7 @@ unzip /opt/QQ/NapCat.Shell.zip -d \$napcat_path
 
 echo "(async () => {await import(\"file://\$napcat_path/napcat.mjs\");})();" > /opt/QQ/resources/app/loadNapCat.js
 mv \$napcat_path/qqnt.json /opt/QQ/resources/app/package.json
-echo -e "NapCat安装完成\e[32m输入命令 napat \e[0m"
+echo -e "NapCat安装完成\e[32m输入命令 napat -q <QQ号> \e[0m 来启动NapCat"
 EOF
 
 ## start command
