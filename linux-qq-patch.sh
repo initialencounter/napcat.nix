@@ -3,11 +3,11 @@ qq_path=$cwd/qq
 
 mkdir -p $qq_path
 
-curl -L -o linux-qq.deb https://dldir1.qq.com/qqfile/qq/QQNT/f60e8252/linuxqq_3.2.12-28327_amd64.deb
+curl -L -o linux-qq.deb https://dldir1.qq.com/qqfile/qq/QQNT/0256c948/linuxqq_3.2.12-28418_amd64.deb
 dpkg-deb -R linux-qq.deb $qq_path
 
 echo -e "\e[32m解压deb中...\e[0m"
-curl -L -o $qq_path/opt/QQ/NapCat.Shell.zip https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.18/NapCat.Shell.zip
+curl -L -o $qq_path/opt/QQ/NapCat.Shell.zip https://github.com/NapNeko/NapCatQQ/releases/download/v2.6.24/NapCat.Shell.zip
 
 ## patch postinst
 cat >> $cwd/qq/DEBIAN/postinst <<EOF
