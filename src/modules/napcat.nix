@@ -36,9 +36,8 @@
     postFixup = ''
       mkdir -p $out/opt/QQ/resources/app/napcat
       unzip ${napcat-shell-zip} -d $out/opt/QQ/resources/app/napcat
-      rm -rf $out/opt/QQ/resources/app/package.json
-      mv $out/opt/QQ/resources/app/napcat/qqnt.json $out/opt/QQ/resources/app/package.json
       echo "(async () => {await import('/root/napcat/napcat.mjs');})();" > $out/opt/QQ/resources/app/loadNapCat.js
+      sed -i 's|"main": "[^"]*"|"main": "./loadNapCat.js"|' $out/opt/QQ/resources/app/package.json
     '';
     meta = {};
   });
