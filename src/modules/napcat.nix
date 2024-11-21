@@ -31,7 +31,7 @@
   src = srcs.${currentSystem} or (throw "Unsupported system: ${currentSystem}");
   patched = pkgs.qq.overrideAttrs (old: {
     buildInputs = (old.buildInputs or []) ++ [ pkgs.unzip ];  # 添加 unzip 到依赖中
-    version = "3.2.13-28971";
+    version = "3.2.13-2024.11.21";
     inherit src;
     postFixup = ''
       mkdir -p $out/opt/QQ/resources/app/napcat
