@@ -28,6 +28,7 @@ if [ "$1" = "qq" ]; then
     
     sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/modules/napcat.nix
     sed -i "s|qq_version = \".*\";|qq_version = \"$version\";|g" ./src/modules/napcat.nix
+    sed -i "s| version = \".*\";| version = \"$version\";|g" ./src/modules/napcat.nix
     sed -i "s|qq_amd64_url = \".*\";|qq_amd64_url = \"$amd64_url\";|g" ./src/modules/napcat.nix
     sed -i "s|qq_amd64_hash = \".*\";|qq_amd64_hash = \"$amd64_hash\";|g" ./src/modules/napcat.nix
     sed -i "s|qq_arm64_url = \".*\";|qq_arm64_url = \"$arm64_url\";|g" ./src/modules/napcat.nix
