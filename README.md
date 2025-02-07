@@ -6,15 +6,19 @@ Fork from [chronocat.nix](https://github.com/Anillc/chronocat.nix)
 
 # 使用方法
 
-## install nix
+## 快速体验
+
+```shell
+nix run github:initialencounter/napcat.nix
+```
+
+## setup nix
 
 [NixOS](https://nixos.org/download/)
 
 ```shell
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
-
-## setup
 
 ```shell
 mkdir -p ~/.config/nix && touch ~/.config/nix/nix.conf
