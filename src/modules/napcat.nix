@@ -34,8 +34,8 @@
     version = "3.2.16-2025.4.1";
     inherit src;
     postFixup = ''
-      mkdir -p $out/opt/QQ/resources/app/napcat
-      unzip ${napcat-shell-zip} -d $out/opt/QQ/resources/app/napcat
+      mkdir -p $out/napcat
+      unzip ${napcat-shell-zip} -d $out/napcat
       echo "(async () => {await import('/root/napcat/napcat.mjs');})();" > $out/opt/QQ/resources/app/loadNapCat.js
       sed -i 's|"main": "[^"]*"|"main": "./loadNapCat.js"|' $out/opt/QQ/resources/app/package.json
     '';

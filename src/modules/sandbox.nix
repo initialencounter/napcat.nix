@@ -42,7 +42,7 @@ in {
       --uid 0 --gid 0 \
       --clearenv \
       --ro-bind /nix/store /nix/store \
-      --bind ./data /root \
+      --bind ./data /root/napcat/config \
       --proc /proc \
       --dev /dev \
       --tmpfs /tmp \
@@ -68,9 +68,7 @@ in {
 
         export DISPLAY=':${toString cfg.display}'
         createService xvfb 'Xvfb :${toString cfg.display} > /dev/null 2>&1'
-        if [ ! -f /root/napcat/napcat.mjs ]; then
-          cp ${cfg.store}/opt/QQ/resources/app/napcat /root/napcat -r
-        fi
+        cp -rf ${cfg.store}/napcat/* /root/napcat/
         createService program "${cfg.program} $@"
         runsvdir /services
       ''} "$@"
