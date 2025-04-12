@@ -34,7 +34,7 @@ in {
   };
   config.sandbox.sandbox = pkgs.writeScriptBin cfg.name ''
     #!${pkgs.runtimeShell}
-    mkdir -p data
+    mkdir -p /data/nc-config /data/qq-config
     ${pkgs.bubblewrap}/bin/bwrap \
       --unshare-all \
       --share-net \
@@ -42,7 +42,8 @@ in {
       --uid 0 --gid 0 \
       --clearenv \
       --ro-bind /nix/store /nix/store \
-      --bind ./data /root/napcat/config \
+      --bind /data/nc-config /root/napcat/config \
+      --bind /data/qq-config /root/.config/QQ \
       --proc /proc \
       --dev /dev \
       --tmpfs /tmp \
