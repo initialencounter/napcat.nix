@@ -42,6 +42,7 @@ in {
       --uid 0 --gid 0 \
       --clearenv \
       --ro-bind /nix/store /nix/store \
+      --ro-bind ${pkgs.tzdata}/share/zoneinfo/Asia/Shanghai /etc/localtime \
       --bind /data/nc-config /root/napcat/config \
       --bind /data/qq-config /root/.config/QQ \
       --proc /proc \
