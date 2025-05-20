@@ -2,8 +2,6 @@
 
 Fork from [chronocat.nix](https://github.com/Anillc/chronocat.nix)
 
-配置文件目录 ./data/napcat/config
-
 # 使用方法
 
 ## 快速体验
