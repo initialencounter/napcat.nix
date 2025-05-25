@@ -8,10 +8,10 @@ if [ "$1" = "napcat" ]; then
 
     # use friendlier hashes
     amd64_hash=$(nix hash to-sri --type sha256 "$amd64_hash")
-    sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/modules/napcat.nix
-    sed -i "s|napcat_version = \".*\";|napcat_version = \"$version\";|g" ./src/modules/napcat.nix
-    sed -i "s|napcat_url = \".*\";|napcat_url = \"$amd64_url\";|g" ./src/modules/napcat.nix
-    sed -i "s|napcat_hash = \".*\";|napcat_hash = \"$amd64_hash\";|g" ./src/modules/napcat.nix
+    sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/sources.nix
+    sed -i "s|napcat_version = \".*\";|napcat_version = \"$version\";|g" ./src/sources.nix
+    sed -i "s|napcat_url = \".*\";|napcat_url = \"$amd64_url\";|g" ./src/sources.nix
+    sed -i "s|napcat_hash = \".*\";|napcat_hash = \"$amd64_hash\";|g" ./src/sources.nix
 fi
 
 if [ "$1" = "qq" ]; then
@@ -26,11 +26,10 @@ if [ "$1" = "qq" ]; then
     amd64_hash=$(nix hash to-sri --type sha256 "$amd64_hash")
     arm64_hash=$(nix hash to-sri --type sha256 "$arm64_hash").
     
-    sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/modules/napcat.nix
-    sed -i "s|qq_version = \".*\";|qq_version = \"$version\";|g" ./src/modules/napcat.nix
-    sed -i "s| version = \".*\";| version = \"$version\";|g" ./src/modules/napcat.nix
-    sed -i "s|qq_amd64_url = \".*\";|qq_amd64_url = \"$amd64_url\";|g" ./src/modules/napcat.nix
-    sed -i "s|qq_amd64_hash = \".*\";|qq_amd64_hash = \"$amd64_hash\";|g" ./src/modules/napcat.nix
-    sed -i "s|qq_arm64_url = \".*\";|qq_arm64_url = \"$arm64_url\";|g" ./src/modules/napcat.nix
-    sed -i "s|qq_arm64_hash = \".*\";|qq_arm64_hash = \"$arm64_hash\";|g" ./src/modules/napcat.nix
+    sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/sources.nix
+    sed -i "s|qq_version = \".*\";|qq_version = \"$version\";|g" ./src/sources.nix
+    sed -i "s|qq_amd64_url = \".*\";|qq_amd64_url = \"$amd64_url\";|g" ./src/sources.nix
+    sed -i "s|qq_amd64_hash = \".*\";|qq_amd64_hash = \"$amd64_hash\";|g" ./src/sources.nix
+    sed -i "s|qq_arm64_url = \".*\";|qq_arm64_url = \"$arm64_url\";|g" ./src/sources.nix
+    sed -i "s|qq_arm64_hash = \".*\";|qq_arm64_hash = \"$arm64_hash\";|g" ./src/sources.nix
 fi
