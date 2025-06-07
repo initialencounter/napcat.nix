@@ -7,7 +7,7 @@ if [ "$1" = "napcat" ]; then
     amd64_hash=$(nix-prefetch-url $amd64_url)
 
     # use friendlier hashes
-    amd64_hash=$(nix hash to-sri --type sha256 "$amd64_hash")
+    amd64_hash=$(nix hash convert --hash-algo sha256 "$amd64_hash")
     sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/sources.nix
     sed -i "s|napcat_version = \".*\";|napcat_version = \"$version\";|g" ./src/sources.nix
     sed -i "s|napcat_url = \".*\";|napcat_url = \"$amd64_url\";|g" ./src/sources.nix
@@ -23,8 +23,8 @@ if [ "$1" = "qq" ]; then
     # use friendlier hashes
     amd64_hash=$(nix-prefetch-url $amd64_url)
     arm64_hash=$(nix-prefetch-url $arm64_url)
-    amd64_hash=$(nix hash to-sri --type sha256 "$amd64_hash")
-    arm64_hash=$(nix hash to-sri --type sha256 "$arm64_hash").
+    amd64_hash=$(nix hash convert --hash-algo sha256 "$amd64_hash")
+    arm64_hash=$(nix hash convert --hash-algo sha256 "$arm64_hash").
     
     sed -i "s|# Last updated: .*\.|# Last updated: $(date +%F)\.|g" ./src/sources.nix
     sed -i "s|qq_version = \".*\";|qq_version = \"$version\";|g" ./src/sources.nix
