@@ -1,0 +1,31 @@
+name: Auto update sources
+
+on:
+  schedule:
+    - cron:  '0 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v31
+    - name: Get latest version
+      run: |
+        echo "LATEST_NAPCAT_VERSION=$(echo "$(curl "https://api.github.com/repos/NapNeko/NapCatQQ/releases/latest" | jq -r '.tag_name')" | sed 's/^.//')" >> $GITHUB_ENV
+    - name: Get local version
+      run: |
+        echo "LOCAL_NAPCAT_VERSION=$(grep "napcat_version" src/sources.nix | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")" >> $GITHUB_ENV
+    - name: update napcat
+      if: env.LOCAL_NAPCAT_VERSION != env.LATEST_NAPCAT_VERSION
+      run: |
+        ./update.sh napcat
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add .
+        git commit -m "napcat ${{ env.LOCAL_NAPCAT_VERSION }} -> ${{ env.LATEST_NAPCAT_VERSION }}"
+        git push
