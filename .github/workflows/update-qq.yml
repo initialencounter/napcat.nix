@@ -1,0 +1,61 @@
+name: Update QQ
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Linux QQ 下载 URL'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+          fetch-depth: 0
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v31
+
+    - name: Update QQ 
+      run: |
+        set -euo pipefail
+        
+        if [ ! -f "./update.sh" ]; then
+          echo "Error: update.sh not found!"
+          exit 1
+        fi
+
+        chmod +x ./update.sh
+
+        sources_file="src/sources.nix"
+        old_version=$(grep -m1 'version = "' "$sources_file" | cut -d'"' -f2)
+        old_hash=$(grep -m1 'amd64_hash = "' "$sources_file" | cut -d'"' -f2)
+
+        ./update.sh qq "${{ github.event.inputs.url }}"
+
+        new_version=$(grep -m1 'version = "' "$sources_file" | cut -d'"' -f2)
+        new_hash=$(grep -m1 'amd64_hash = "' "$sources_file" | cut -d'"' -f2)
+
+        if [[ "${old_hash}" != "${new_hash}" ]]; then
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+          git add "$sources_file"
+
+          if [[ "${old_version}" == "${new_version}" ]]; then
+            commit_msg="fix(qq): update package hash"
+          else
+            commit_msg="qq ${old_version} -> ${new_version}"
+          fi
+
+          git commit -m "$commit_msg"
+          git push origin HEAD:master
+        else
+          echo "ℹ️ No changes detected, skipping commit"
+        fi
